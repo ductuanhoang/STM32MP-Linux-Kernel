@@ -1,0 +1,33 @@
+Run ENV toolchain in Host
+$ . /opt/dey/4.0-r5/ccmp15-dvk/environment-setup-cortexa7t2hf-neon-vfpv4-dey-linux-gnueabi
+
+### Read value mcp3208.
+- In HOST
+$arm-dey-linux-gcc -o mcp3208_read mcp3208_read.c
+$scp mcp3208_read root@<ip-address>:/tmp
+- In Device
+$modprobe mcp320x
+$cd tmp
+$chmod +x mcp3208_read
+$./mcp3208_read
+
+### Read value tps2480.
+- In HOST
+$arm-dey-linux-gcc -o tps24880_read tps24880_read.c
+$scp tps24880_read root@<ip-address>:/tmp
+- In Device
+$modprobe tps2480
+$cd tmp
+$chmod +x tps24880_read
+$./tps24880_read
+
+### Get, set time in rv3028
+- In HOST
+$arm-dey-linux-gcc -o rtc_rv3028 rtc_rv3028.c
+$scp rtc_rv3028 root@<ip-address>:/tm
+
+- In Device
+$modprobe rtc-rv3028
+$cd /tmp
+$./rtc_rv3028 get
+$./rtc_rv3028 set
